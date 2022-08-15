@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/redux_todo.iml" filepath="$PROJECT_DIR$/.idea/redux_todo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../to_do_redux_practice/.idea/to_do_redux_practice.iml" filepath="$PROJECT_DIR$/../to_do_redux_practice/.idea/to_do_redux_practice.iml" />
     </modules>
   </component>
 </project>

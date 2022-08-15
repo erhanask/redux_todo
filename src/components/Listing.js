@@ -1,17 +1,21 @@
 import React from "react";
+import {useSelector} from "react-redux";
+
 
 const Listing = () => {
+    const todos = useSelector(state => state.todos.items);
+
     return (
-        <div className={`listing-wrapper`}>
-            <div className={`green listing-box`}>
-                Note 1
-            </div>
-            <div className={`blue listing-box`}>
-                Note 2
-            </div>
-            <div className={`yellow listing-box`}>
-                Note 3
-            </div>
+        <div className={`row listing-wrapper`}>
+            {todos.map((todo) => {
+                return (
+                    <div className={`${todo.color} col-4 listing-box`}>
+                        {todo.name}
+                    </div>
+                )
+            })}
+
+
         </div>
     )
 }
