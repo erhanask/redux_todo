@@ -1,14 +1,11 @@
 import React, {useState} from "react";
 import {useDispatch} from "react-redux";
 import {addTodo} from "../redux/todos/todosSlice";
-import {useSelector} from "react-redux";
 
 const Form = () => {
     // {/*todo: option-checked ise bu 📌 emoji gelecek.*/}
     const [currentColor, setCurrentColor] = useState('red');
     const dispatch = useDispatch();
-    const todos = useSelector( state => state.todos.items);
-    console.log(todos);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -22,7 +19,7 @@ const Form = () => {
         <div className={`form-wrapper`}>
             <form onSubmit={handleSubmit}
                   className={`form-form`}>
-                <textarea className={`form-input`} placeholder={`Enter Your Note Here...`}></textarea>
+                <textarea required={'required'} className={`form-input`} placeholder={`Enter Your Note Here...`}></textarea>
                 <div>
                     <span onClick={() => setCurrentColor('red')} className={`red form-option`}>
                         {currentColor === 'red' ? '📌' : ''}

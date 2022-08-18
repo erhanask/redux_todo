@@ -1,16 +1,30 @@
 import React from "react";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {deleteTodo} from "../redux/todos/todosSlice";
 
 
 const Listing = () => {
     const todos = useSelector(state => state.todos.items);
-
+    const filteredItems = useSelector(state => state.todos.filteredItems);
+    const dispatch = useDispatch()
     return (
         <div className={`row listing-wrapper`}>
-            {todos.map((todo) => {
+            {filteredItems ? filteredItems.map((filteredItem) => {
                 return (
-                    <div className={`${todo.color} col-4 listing-box`}>
-                        {todo.name}
+                    <div key={filteredItem.id} className={`col-4 listing-box`}>
+                        <div className={`${filteredItem.color} listing-content`}>
+                            {filteredItem.name}
+                            <span onClick={() => {dispatch(deleteTodo(filteredItem.id))}} className={`content-delete`}>X</span>
+                        </div>
+                    </div>
+                )
+            }) : todos.map((todo) => {
+                return (
+                    <div key={todo.id} className={`col-4 listing-box`}>
+                        <div className={`${todo.color} listing-content`}>
+                            {todo.name}
+                            <span onClick={() => {dispatch(deleteTodo(todo.id))}} className={`content-delete`}>X</span>
+                        </div>
                     </div>
                 )
             })}

@@ -1,4 +1,4 @@
-import {createSlice, nanoid} from "@reduxjs/toolkit";
+import {createSlice, current, nanoid} from "@reduxjs/toolkit";
 
 export const todosSlice = createSlice({
     name: 'todos',
@@ -19,7 +19,8 @@ export const todosSlice = createSlice({
                 name: 'Note 3',
                 color: 'yellow',
             }
-        ]
+        ],
+        filteredItems: ''
     },
     reducers: {
         addTodo: {
@@ -37,9 +38,22 @@ export const todosSlice = createSlice({
                 }
             }
         },
+        filterTodos: {
+            reducer: (state, action) => {
+                let items = current(state).items.filter(item => item.name.toLowerCase().includes(action.payload.toLowerCase()) );
+                state.filteredItems = action.payload !== '' ? items : '';
+            }
+        },
+        deleteTodo: {
+            reducer: (state, action) => {
+                state.items = state.items.filter(item => item.id !== action.payload )
+                if (state.filteredItems)
+                state.filteredItems = state.filteredItems.filter(item => item.id !== action.payload )
+            }
+        }
     }
 
 })
 
-export const {addTodo} = todosSlice.actions;
+export const {addTodo, filterTodos, deleteTodo} = todosSlice.actions;
 export default todosSlice.reducer;
